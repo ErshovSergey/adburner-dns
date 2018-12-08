@@ -50,15 +50,18 @@ Set environment variables in .env file. Check below for available configurations
 
 ### For x86 servers
 ```yaml
+version: '2'
 services:
   adburner:
-    image: "subash/adburner-dns"  
+    image: "subash/adburner-dns"
     restart: "always"
+    container_name: "${NAME}_adburner"
     env_file: ".env"
+    hostname: adburner
     volumes:
-      - "./adburner-data:/app/data"
+      - "${ADBURNER_PATH}/adburner-data:/app/data"
     ports:
-      - "53:53/udp"
+      -  "${IP_PORT}:53/udp"
 ```
 
 ### For arm servers such as raspberry pi
